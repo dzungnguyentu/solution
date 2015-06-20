@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Solution</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<label for="text">Input Here:</label>
+<input type="text" value="" id="text" onkeyup="showResult()"/>
+<p>Result:</p>
+<p id="result"></p>
+<script type="text/javascript">
+    function showResult(){
+        var value = jQuery('#text').val();
+        if(parseInt(value) && 0 < value && value < 26) {
+            jQuery.ajax({
+                method: "POST",
+                url: "process.php",
+                data: { value: parseInt(value) }
+            }).done(function( response ) {
+                document.getElementById('result').innerHTML = response;
+            });
+        } else {
+            document.getElementById('result').innerHTML = 'You need to enter the integer from 1 to 25 to input!';
+        }
+    }
+</script>
+</body>
+</html>
